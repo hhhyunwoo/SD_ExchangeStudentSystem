@@ -7,14 +7,15 @@ public class main {
 		Scanner scan = new Scanner(System.in);
 		int loginNumber = 0;
 		String ID, PW, IDNumber;
-		String savedID, savedPW, savedIDNumber = null;
+		String savedID = null, savedPW = null, savedIDNumber = null;
 		String line = null;
+		String line2 = null;
 		int num = 0;
 		int err = 0;
 		int userNum = 0;
 		String loginInfo = "loginInfo.txt";
 		System.out.println("*************** KNU교환학생 지원 시스템 ***************");
-		System.out.println("YES 계정으로 로그인 해주세요");
+		System.out.println("	      YES 계정으로 로그인 해주세요\n\n");
 
 		File file = new File(loginInfo);
 		FileWriter fw = null;
@@ -26,23 +27,7 @@ public class main {
 			e1.printStackTrace();
 		}
 
-		/*
-		 * if (loginNumber == 1) { System.out.print("IDNumber:"); IDNumber =
-		 * scan.next(); System.out.print("ID:"); ID = scan.next();
-		 * System.out.print("PW:"); PW = scan.next();
-		 * 
-		 * try {
-		 * 
-		 * // 파일 객체 생성
-		 * 
-		 * // 파일안에 문자열 쓰기 fw.write("\n" + ID + "@" + PW + "#" + IDNumber); fw.flush();
-		 * 
-		 * // 객체 닫기 fw.close();
-		 * 
-		 * } catch (Exception e) { e.printStackTrace(); }
-		 */
-
-		while (true) {//login check
+		while (true) {// login check
 			System.out.print("ID:");
 			ID = scan.next();
 			System.out.print("PW:");
@@ -69,8 +54,7 @@ public class main {
 				if (err == 0) {
 					System.out.println("####ID 또는 PW 잘못 입력하셨습니다.####");
 					continue;
-				}
-				else {
+				} else {
 					System.out.println("로그인 성공");
 					userNum = Integer.parseInt(savedIDNumber);
 					break;
@@ -87,14 +71,54 @@ public class main {
 					} catch (IOException e) {
 					}
 			}
+
 		}
 
 		//////////////////////////////////////////////////////////////
 		Clear.clearScreen();
-		switch(userNum) {
+		Student student = new Student();
+		
+		
+		switch (userNum) {
 		case 1:
 			System.out.println("<메인 화면>			!학생!");
+			file = new File("C:\\Users\\qgusd\\Desktop\\공부\\자바\\workspace\\Go\\StudentInfo\\"+savedID+".txt");
+			fw = null;
+
+			try {
+				fw = new FileWriter(file, true);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
+			BufferedReader br = null;
+			try {
+				br = new BufferedReader(new FileReader(file));
+
+				while ((line2 = br.readLine()) != null) {
+
+					String[] txtArr = line2.split("#");
+
+					student.ID = savedID;///////////////// student 생성하기
+					student.PW = savedPW;
+					student.name = txtArr[0];
+					student.studentNumber = txtArr[1];
+					student.grade = txtArr[2];
+				}
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			} finally {
+				if (br != null)
+					try {
+						br.close();
+					} catch (IOException e) {
+					}
+			}
 			break;
+
 		case 2:
 			System.out.println("<메인 화면>			!관리자!");
 			break;
@@ -102,7 +126,6 @@ public class main {
 			System.out.println("<메인 화면>			!교수!");
 			break;
 		}
-
 
 		if (userNum == 1) {// 학생
 			System.out.println("1.모집공고조회");
@@ -127,6 +150,28 @@ public class main {
 
 			System.out.print(":");
 			num = scan.nextInt();
+		}
+
+		RecruitNotice RN = new RecruitNotice();
+
+		/*
+		 * System.out.println(RN.DU[0].region);
+		 * System.out.println(RN.DU[0].usingLanguage);
+		 * System.out.println(RN.DU[0].major); System.out.println(RN.DU[0].country);
+		 * System.out.println(RN.DU[0].KschoolName);
+		 * System.out.println(RN.DU[0].EschoolName);
+		 * System.out.println(RN.DU[0].recruitNumber);
+		 * System.out.println(RN.DU[0].applicationQualification);
+		 * System.out.println(RN.DU[0].dispatchPeriod);
+		 * System.out.println(RN.DU[0].etc);
+		 */
+
+		if (num == 1) {
+			RN.checkRecruitNotice();
+		}
+		else if(num ==2) {
+			ApplicationForm AF = new ApplicationForm(student.studentNumber);
+			AF.Check();
 		}
 
 	}

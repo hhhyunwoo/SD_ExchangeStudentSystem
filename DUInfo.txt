@@ -1,1 +1,11 @@
-a@b@c@d@e@f@g@h@i@j
+Europe@English@Computer Science@Germany@베를린 공대@Berlin Univ@7@Toeic 900@1 semester@nothing
+Europe@Spanish@IT@Spain@스페인 대학@Spain Univ@5@Toeic 800@1 semester@nothing
+Europe@English@IT@Poland@폴란드 대학@Poland Univ@3@No@2 semester@nothing
+Europe@English@Economical@UK@해밀턴 대학@Hamilton Univ@7@Toefl 150@1 year@nothing
+English@English@Computer Science@USA@뉴욕 대학@NewYork Univ@2@Toeic 700@1 semester@veryGood
+English@English@Economical@USA@텍사스 대학@Texas Univ@2@Toeic 800@2 semester@nothing
+English@English@Computer Science@USA@라스베가스 대학@LasVegs Univ@2@Toeic 900@1 semester@nothing
+English@English@Economical@Mexico@멕시코 대학@Mexico Univ@5@No@2semester@nothing
+English@English@IT@England@영국 공학 대학@England Univ@5@Toeic 700@1 semester@nothing
+Chinese@Chinese@Computer Science@China@베이징 대학@Peking Univ@3@HSK 6급@1 semester@nothing
+Chinese@Chinese@IT@China@베이징 대학@Wuhan Univ@5@HSK 4급@2 semester@nothing

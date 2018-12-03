@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ApplicationForm {
-	Student student = new Student();
+	Student student;
 	
 	public ApplicationForm(Student student){
 		this.student = student;

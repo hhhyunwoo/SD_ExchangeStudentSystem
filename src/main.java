@@ -2,6 +2,7 @@ import java.util.*;
 import java.io.*;
 
 public class main {
+	public static int userNum = 0;
 
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
@@ -12,7 +13,7 @@ public class main {
 		String line2 = null;
 		int num = 0;
 		int err = 0;
-		int userNum = 0;
+
 		String loginInfo = "loginInfo.txt";
 		System.out.println("*************** KNU교환학생 지원 시스템 ***************");
 		System.out.println("	      YES 계정으로 로그인 해주세요\n\n");
@@ -77,12 +78,11 @@ public class main {
 		//////////////////////////////////////////////////////////////
 		Clear.clearScreen();
 		Student student = new Student();
-		
-		
+
 		switch (userNum) {
 		case 1:
 			System.out.println("<메인 화면>			!학생!");
-			file = new File("C:\\Users\\qgusd\\Desktop\\공부\\자바\\workspace\\Go\\StudentInfo\\"+savedID+".txt");
+			file = new File("C:\\Users\\qgusd\\Desktop\\공부\\자바\\workspace\\Go\\StudentInfo\\" + savedID + ".txt");
 			fw = null;
 
 			try {
@@ -126,33 +126,85 @@ public class main {
 			System.out.println("<메인 화면>			!교수!");
 			break;
 		}
-
+		
 		if (userNum == 1) {// 학생
-			System.out.println("1.모집공고조회");
-			System.out.println("2.응시원서 작성");
-			System.out.println("3.학점인정");
+			while (true) {
+				System.out.println("1.모집공고조회");
+				System.out.println("2.응시원서 작성");
+				System.out.println("3.학점인정");
+				System.out.println("4.나가기");
 
-			System.out.print(":");
-			num = scan.nextInt();
+				System.out.print(":");
+				num = scan.nextInt();
+
+				
+
+				if (num == 1) {// 모집공고조회
+					RecruitNotice RN1 = new RecruitNotice();
+					RN1.checkRecruitNotice();
+				} else if (num == 2) {
+					ApplicationForm AF;
+					AF = new ApplicationForm(student);
+					AF.Check();
+				} else if (num == 3) {
+
+				}else if (num == 4) {
+					break;
+				}
+			}
+
 		} else if (userNum == 2) {// 관리자
-			System.out.println("1.모집공고조회");
-			System.out.println("2.모집공고 게시/수정");
-			System.out.println("3.합격자 선발(평가점수 입력)");
-			System.out.println("4.파견실적 게시");
-			System.out.println("5.학점인정 승인");
+			while (true) {
+				System.out.println("1.모집공고조회");
+				System.out.println("2.모집공고 게시/수정");
+				System.out.println("3.합격자 선발(평가점수 입력)");
+				System.out.println("4.파견실적 게시");
+				System.out.println("5.학점인정 승인");
+				System.out.println("6.나가기");
 
-			System.out.print(":");
-			num = scan.nextInt();
+				System.out.print(":");
+				num = scan.nextInt();
 
-		} else if (userNum == 3) {// 교수
-			System.out.println("1.모집공고조회");
-			System.out.println("2.파견실적 조회");
+				DispatchedResult DR = new DispatchedResult();
+				RecruitNotice RN = new RecruitNotice();
 
-			System.out.print(":");
-			num = scan.nextInt();
+				if (num == 1) {// 모집공고조회
+					RN.checkRecruitNotice();
+				} else if (num == 2) {// 모집공고 게시/수정
+					RN.addRecuritNotice();
+				} else if (num == 3) {
+
+				} else if (num == 4) {// 파견실적 게시
+					DR.writeResult();
+				} else if (num == 5) {
+
+				} else if (num == 6) {
+					break;
+				}
+			}
+
+		} else if (userNum == 3)
+
+		{// 교수
+			while (true) {
+				System.out.println("1.모집공고조회");
+				System.out.println("2.파견실적 조회");
+				System.out.println("3.나가기");
+
+				System.out.print(":");
+				num = scan.nextInt();
+				RecruitNotice RN3 = new RecruitNotice();
+
+				DispatchedResult DR2 = new DispatchedResult();
+				if (num == 1) {// 모집공고조회
+					RN3.checkRecruitNotice();
+				} else if (num == 2) {// 파견실적조회
+					DR2.printResult();
+				}else if (num == 3) {
+					break;
+				}
+			}
 		}
-
-		RecruitNotice RN = new RecruitNotice();
 
 		/*
 		 * System.out.println(RN.DU[0].region);
@@ -165,15 +217,6 @@ public class main {
 		 * System.out.println(RN.DU[0].dispatchPeriod);
 		 * System.out.println(RN.DU[0].etc);
 		 */
-
-		if (num == 1) {
-			RN.checkRecruitNotice();
-		}
-		else if(num ==2) {
-			ApplicationForm AF = new ApplicationForm(student.studentNumber);
-			AF.Check();
-		}
-
 	}
 
 }
